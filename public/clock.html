@@ -1,11 +1,24 @@
 <!DOCTYPE HTML>
-<html manifest="clock.manifest">
+<!--  
+<html manifest="clock.manifest"> -->
+<html>
  <head>
   <title>Clock</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
   <script src="clock.js"></script>
-  <link rel="stylesheet" href="clock.css">
+  
+
+	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="clock.css">
+
+
+
  </head>
  <body onload="foo()">
   <p>The time is: <output id="clock"></output></p>
+
+<input id="autocomplete" type="text" placeholder="city name" />
+<input type="submit" value="Add Clock!">
  </body>
 </html>
