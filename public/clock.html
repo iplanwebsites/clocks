@@ -27,11 +27,22 @@
  <body onload="foo()">
   <p>The time is: <output id="clock"></output></p>
 
+<div id="clocks">
+	clocks
+	</div>
 
-<form action="#/post/q"  method="PUT" id="search_form">
-	<input name="q" id="q" placeholder="city name" type="search" id="autocomplete" />
+<div id="new_clock">
+<form action="#/post/q"  method="POST" id="search_form">
+	<input name="q" id="q" placeholder="city name" type="search" />
 	<input type="submit" value="Add Clock!">
 </form>
+</div>
+
+<form action="#/del/clock"  method="DEL">
+	<input name="clock_name" type="hidden" value="Montreal, QC"/>
+	<input type="submit" value="delete!">
+</form>
+
 
 
  </body>

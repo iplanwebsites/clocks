@@ -1,0 +1,24 @@
+
+<tr>
+
+   
+  <td>
+		<img src="<%= user.gravatarUrl %>" width="50" height="50" />
+		<a href="mailto:<%= user.email %>"><%= user.email %></a>
+		<% if(getEmailDomain( user.email )){ %>
+			<a href="http://<%= getEmailDomain(user.email) %>"><%= getEmailDomain(user.email) %></a>
+		<% } %>
+	</td>
+	<td>
+		<img src="<%= user.twitterIcon %>" width="50" height="50" />
+			<strong class="mono"> <%= user.twitterCount %> - </strong>
+			<a href="http://twitter.com/#!<%= user.twitter %>">
+			<%= user.twitter %>
+		</a>
+	</td>
+	
+	<td><%= user.dateAskInvite %></td>
+  <td><a href="#" class="button red" >delete</a></td>
+	<td><a href="#" class="button green" >Send an invite</a></td>
+
+</tr>
