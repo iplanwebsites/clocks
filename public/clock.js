@@ -1,3 +1,28 @@
+/*
+
+TODO
+
+Update time in clocks (setInterval, on seconds, we update GMT, and then refresh the clocks...)
+Bind the clocks times to an event???
+
+make the separator (:) blink (toggle aclass?)
+
+arrow cursor on text (bar is ugly)
+
+append clock so they appear in chronologic order (past -present - future)
+
+if the clock already exist, dont add it again...
+
+clear the field when we add a city
+
+when user press enter on suggestion, submit!
+
+maybe auto-fill the field (instead of simply suggesting under...)
+
+*/
+
+
+
 function foo() {
 	document.getElementById('clock').textContent = new Date();
 	setTimeout(foo, 100);
@@ -19,8 +44,22 @@ function removeDuplicateElement(arrayName)
 }
 
 
+
+function updateTime(){
+	var here = new Date();
+	var offset = here.getTimezoneOffset(); //returns 120 for 2 hours.
+	gmt = new Date();
+	gmt.setTime(here.getTime() + (offset*60000) );
+	
+	$('.clock').trigger('minuteChange'); //TODO: only call when minute change!
+}
+
+
+
 $(document).ready(function() {
 	
+
+
 	
 	//sammy put route for the submit...
 	
@@ -49,9 +88,13 @@ $(document).ready(function() {
 	});// eo get Json (init)
 	
 	
+	setInterval(function() {
+		updateTime();
+	  // Do something every 1 seconds
+	}, 1000);
+	
 
-	
-	
+updateTime();
 	
 	
 	sammy = Sammy('body', function () {
@@ -85,7 +128,7 @@ $(document).ready(function() {
 				
 				if(str == cityname){ //todo, lowercase the comparaison, replace the dashes...
 					//perfect match!
-					alert("perfect!" + val);
+					//alert("perfect!" + val);
 					newCity = val;
 				}else if(0){ //we find if it may be a possible match
 					if(str){	//indexof, without coma...
@@ -102,20 +145,57 @@ $(document).ready(function() {
 					
 					 $.each(sammy.tz, function(index_tz, data_tz) {
 							if(data_tz['name'] == newCity['z']){ 
-								alert('name matches!' + newCity);
+								//alert('name matches!' + newCity);
 								newCity['tz'] = data_tz; //we embed the timezone object within the city one
+							}else{
+								//No timezone found for this city...
 							}
 					});//eo each tz
 					
+					cityTime = new Date();
+					//TODO! We should take into account the daylight saving times!!
+					cityTime.setTime(gmt.getTime() - ( newCity['tz']['off'] * 60000) );
+					
+					
+					//Append the click DIV
 					context.clocksDiv = context.$element('#clocks');
 					//$(context.linkContainer).html('');
-          context.render('templates/clock.html', {city: newCity})
+          context.render('templates/clock.html', {city: newCity, cityTime: cityTime})
             .appendTo(context.clocksDiv).then(function(content) {
+							//TODO: init the analog clock here once the markup is there...
+				
+							
+							$('.clock').bind('minuteChange', function() {
+							  //alert('User clicked on "foo."');
+								cityTime = new Date();
+								//TODO! We should take into account the daylight saving times!!
+								var offset = $(this).find('.offset').text();
+								cityTime.setTime(gmt.getTime() - ( offset * 60000) );
+								$(this).find('.hours').text(cityTime.getHours());
+								$(this).find('.minutes').text(cityTime.getMinutes());
+								$(this).find('.mili').text(cityTime.getTime());
+								//todo: update Analog.
+							});
+							$('.clock').trigger('minuteChange');
 							//init this clock's buttons
 							//context.trigger('filter-item'); //if field is already populated (page refresh)
         	});
 					
 					
+				//init the new clock...
+				
+				
+				//alert('here = '+offset+ ':'+here.getHours() + ':'+here.getMinutes() );
+					/*  
+					var MS_PER_MINUTE = 60000;
+					var myStartDate = new Date(myEndDateTime - durationInMinutes * MS_PER_MINUTE);
+					
+					var d1 = new Date();
+					var d2 = new Date(2006, 6, 7);
+					var day = 1000*60*60*24;
+					var diff = Math.ceil((d2.getTime()-d1.getTime())/(day));
+					document.write("Days until vacation: " + diff);
+					*/
 				}
 		    //matchingItems.push(val['ci']); //city name
 		 

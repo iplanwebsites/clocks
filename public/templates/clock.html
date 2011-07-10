@@ -1,6 +1,19 @@
-<div class="city">
-        <div class="city-image"><img src="http://3.bp.blogspot.com/_d_6DsRleVQU/SwE90yBE5HI/AAAAAAAAALw/W7sHX4qLTkU/s1600/monkey.jpg" alt="<%= city.u %>" /></div>
-        <div class="city-artist"><%= city.tz.off %>, <%= city.tz.name %></div>
-        <div class="city-title"><%= city.t %></div>
+<div class="clock">
+	<h1 class="city-name"><%= city.ci %></h1>
+	<h3><%= city.tz.name %></h3>
+        <div class="offset"><%= city.tz.off %></div>
+        
+        <div class="gmt-time"><%= 'gtm = '+ gmt.getHours() + ':'+ gmt.getMinutes()  %></div>
+				<div class="mili"><%= cityTime.getTime() %></div>
+				<div class="city-time">
+				<span class="hours">
+				  
+				</span>
+				<span class="sep">:</span>
+				<span class="minutes">
+					 
+				</span>
+					
+				</div>
         <div class="city-price"><a href="http://<%= city.u %>"><%= city.u %></a></div>
-      </div>
+</div>
