@@ -6,6 +6,15 @@
   <title>Clock</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+	<script src="js/sammy/sammy.js"></script>
+	<script src="js/sammy/plugins/sammy.template.js"></script>
+	<script src="js/sammy/plugins/sammy.storage.js"></script>
+	<script src="js/sammy/plugins/sammy.json.js"></script>
+	<script src="js/sammy/plugins/sammy.oauth2.js"></script>
+	<script src="js/sammy/plugins/sammy.json.js"></script>
+	<script src="js/sammy/plugins/sammy.title.js"></script>
+	
   <script src="clock.js"></script>
   
 
@@ -18,7 +27,12 @@
  <body onload="foo()">
   <p>The time is: <output id="clock"></output></p>
 
-<input id="autocomplete" type="text" placeholder="city name" />
-<input type="submit" value="Add Clock!">
+
+<form action="#/post/q"  method="PUT" id="search_form">
+	<input name="q" id="q" placeholder="city name" type="search" id="autocomplete" />
+	<input type="submit" value="Add Clock!">
+</form>
+
+
  </body>
 </html>
