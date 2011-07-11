@@ -19,6 +19,8 @@ when user press enter on suggestion, submit!
 
 maybe auto-fill the field (instead of simply suggesting under...)
 
+position and stretch the clocks all dynamically, so they always fill all the screen... 
+
 */
 
 
@@ -107,6 +109,10 @@ updateTime();
 		// HOMEPAGE
 		this.get('/', function (context) {
 			
+			//rebuild clocks from cookie...
+			
+			
+			CoolClock.findAndCreateClocks();
 			
 		}); //end "get #/"
     
@@ -177,6 +183,7 @@ updateTime();
 								//todo: update Analog.
 							});
 							$('.clock').trigger('minuteChange');
+							CoolClock.findAndCreateClocks();
 							//init this clock's buttons
 							//context.trigger('filter-item'); //if field is already populated (page refresh)
         	});

@@ -1,6 +1,11 @@
 <div class="clock">
 	<h1 class="city-name"><%= city.ci %></h1>
 	<h3><%= city.tz.name %></h3>
+	
+	<div class="analog">
+		<canvas clock="analog_canvas" class="CoolClock:chunkySwiss:100:seconds:<%= (city.tz.off / 60) * -1  %>"></canvas>
+	</div>
+	
         <div class="offset"><%= city.tz.off %></div>
         
         <div class="gmt-time"><%= 'gtm = '+ gmt.getHours() + ':'+ gmt.getMinutes()  %></div>
