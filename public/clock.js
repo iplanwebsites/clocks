@@ -2,32 +2,41 @@
 
 TODO
 
+download a font package from font-squirrel (cachable)
+
 Update time in clocks (setInterval, on seconds, we update GMT, and then refresh the clocks...)
-Bind the clocks times to an event???
 
 make the separator (:) blink (toggle aclass?)
 
 arrow cursor on text (bar is ugly)
 
-append clock so they appear in chronologic order (past -present - future)
+re-order clock so they appear in chronologic order (past -present - future)
 
 if the clock already exist, dont add it again...
 
-clear the field when we add a city
 
-when user press enter on suggestion, submit!
 
-maybe auto-fill the field (instead of simply suggesting under...)
-
-position and stretch the clocks all dynamically, so they always fill all the screen... 
-
-can the canvas be stretched: yes, but there aliasing, it's not vector...
-
-download a font package from font-squirrel (cachable)
+position and stretch the clocks all dynamically, so they always fill all the screen: 
+ - may not be possible to keep everything relative in size
+ - can the canvas be stretched: yes, but there aliasing, it's not vector...
 
 find a "slugify" function, and use it to generate IDS based on name (lowercase, and special_chars_cleanup)
 
 
+Autocomplete: 
+ - when user press enter on suggestion, submit!
+ - maybe auto-fill the field (instead of simply suggesting under...)
+
+set a BG image on the delete submit button..
+
+On a mouse device only, we only show the delete option when the clock is overed (it shows option).
+ - On touch device, options are always there, or just hidden (simpler app.)
+
+
+12/24 format
+ - bind js action onto these buttons
+ - should it submit a form? no, just a post... can it be radios???
+ - radio that autosubmit the form when changed...
 
 
 */
@@ -124,12 +133,25 @@ updateTime();
 		}); //end "get #/"
     
 		
+		this.put('#/put/format', function (context) {
+				var time_format = this.param['format']; //either metric, or ampm
+			$('.city-time .format.active').removeClass('active');
+			$('.city-time .format .'ampm).addClass('active');
+			alert('setting 12/24 to');
+			// !! TODO!
+			// There are 2 things! the format, and the am and pm toggling, handle am-pm in time management
+			
+			
+		}); //end format route
+		
+		
+		
+		
 		/////ADD ROUTE
 		this.post('#/post/q', function(context) {
-			sammy.trigger('show-page', {page: 'links'});
-			// alert(sammy.cities);
+			//sammy.trigger('show-page', {page: 'links'});
 			str = this.params['q'];
-		//	alert(str);
+			$('#q').val('').focus();
 			
 		//	var matchingItems = [];
 			newCity = 0;
@@ -174,7 +196,7 @@ updateTime();
 					context.clocksDiv = context.$element('#clocks');
 					//$(context.linkContainer).html('');
           context.render('templates/clock.html', {city: newCity, cityTime: cityTime})
-            .appendTo(context.clocksDiv).then(function(content) {
+            .prependTo(context.clocksDiv).then(function(content) {
 							//TODO: init the analog clock here once the markup is there...
 				
 							

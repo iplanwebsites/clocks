@@ -5,27 +5,77 @@ output { font: 2em sans-serif; }
 h1{ font-size:100px; font-weight:100; letter-spacing:30px; text-transform:uppercase; color:#fff; }
 body, html{  background:#cca;}
 
+
+#toggle_format{ float:right;}
+#toggle_format .format { 
+	float:right; padding:7px 10px; background: #fff; 
+	color:#888; margin-right:10px; margin-top:5px;
+	opacity: 0.5;
+	cursor:pointer;
+}
+
+#toggle_format .format.active, #toggle_format .format:hover { 
+	opacity:1;
+}
+
+
 /* ============-  clocks  -============= */
 #clocks{ width:100%; padding: 10px 30px;}
 .clock{ 
-	width:300px; height:350px; background:#fff; margin-top:30px; 
+	width:220px; height:350px; background:#fff; margin-top:30px; 
 	padding:10px;
 	padding-top:0px;
 	float:left;
 	margin-right:10px;
+	
 	 }
 .clock h2{
+	cursor:normal;
 	color:#fff; margin-top:-38px; font-size:40px; text-transform:uppercase; 
 	font-weight:100; font-style:normal;
 	margin-left:-10px;
+	/* TOOD: NOWRAP, overflow:hidden */
 	}
 	
-.clock .city-time{ font-size:70px; padding-left:20px;}
+.clock h3{
+	cursor:normal;
+		color:#aaa; font-size:12px; text-transform:uppercase; 
+		font-weight:100; font-style:normal;
+		padding-bottom:20px;
+	}
+
+.city-time{ font-size:70px; padding-left:20px; cursor:normal;}
 .city-time .hours{ color:#777; }
 .city-time .minutes{ color:#ccc; }
 .city-time .sep{ color:#777; }
 .city-time .sep.blink{ color:#aaa; }
 .city-time .am, .city-time .am {color:#ccc; font-size:12px;}
+
+.city-time .ampm{ float:right; font-size:10px; margin-top:20px;}
+.city-time .format.active{ color:#000;} /* TODO: active state */
 	
 .clock .mili, .clock .offset, .clock .gmt-time{ display:none;}
+
+
+.clock .analog canvas{ opacity: 0.5; }
+
+.clock .delete_bt{ background:#f00;  float:right; text-align:right; }
+.clock .delete_bt .submit{ opacity:0.5; background: #0f0 url('img/TODOO'); }
+.clock .delete_bt:hover{ opacity:1; }
+
+/* ============-  NEW clock box  -============= */
+#new_clock{ height:300px;}
+#new_clock h1{ font-size:200px; color:#999; line-height:0.5em; padding:30px 0px;  }
+#new_clock p{ color:#999; }
+#new_clock input{ font-size:30px; padding:5px; margin-bottom:10px; width:180px;  }
+
+
+
+
+
+
+
+
+
+
 	

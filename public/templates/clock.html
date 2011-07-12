@@ -1,4 +1,12 @@
 <div class="clock">
+  <div class="delete_bt">
+	<form action="#/del/clock"  method="DELETE">
+		<input name="clock_name" type="hidden" value="<%= city.ci %>"/>
+		<input type="submit" class="submit" value="X">
+	</form>
+	</div>
+	
+	
 	<h2 class="city-name"><%= city.ci %></h2>
 	<h3><%= city.tz.name %></h3>
 	
@@ -12,16 +20,16 @@
 -->
 				<div class="mili"><%= cityTime.getTime() %></div>
 				<div class="city-time">
+					<div class="ampm"> 
+						<div class="am">AM</div><div class="pm">PM</div>
+					</div>
 				<span class="hours"></span><span class="sep">:</span><span class="minutes"></span>
+				
 					
 				</div>
 				<!-- 
         <div class="city-price"><a href="http://<%= city.u %>"><%= city.u %></a></div>
 -->
-				<form action="#/del/clock"  method="DELETE">
-					<input name="clock_name" type="hidden" value="<%= city.ci %>"/>
-					<input type="submit" value="delete clock!">
-				</form>
 				
 				
 </div>
