@@ -1,5 +1,5 @@
 <div class="clock">
-	<h1 class="city-name"><%= city.ci %></h1>
+	<h2 class="city-name"><%= city.ci %></h2>
 	<h3><%= city.tz.name %></h3>
 	
 	<div class="analog">
@@ -7,18 +7,21 @@
 	</div>
 	
         <div class="offset"><%= city.tz.off %></div>
-        
+        <!-- 
         <div class="gmt-time"><%= 'gtm = '+ gmt.getHours() + ':'+ gmt.getMinutes()  %></div>
+-->
 				<div class="mili"><%= cityTime.getTime() %></div>
 				<div class="city-time">
-				<span class="hours">
-				  
-				</span>
-				<span class="sep">:</span>
-				<span class="minutes">
-					 
-				</span>
+				<span class="hours"></span><span class="sep">:</span><span class="minutes"></span>
 					
 				</div>
+				<!-- 
         <div class="city-price"><a href="http://<%= city.u %>"><%= city.u %></a></div>
+-->
+				<form action="#/del/clock"  method="DELETE">
+					<input name="clock_name" type="hidden" value="<%= city.ci %>"/>
+					<input type="submit" value="delete clock!">
+				</form>
+				
+				
 </div>

@@ -21,14 +21,24 @@ maybe auto-fill the field (instead of simply suggesting under...)
 
 position and stretch the clocks all dynamically, so they always fill all the screen... 
 
+can the canvas be stretched: yes, but there aliasing, it's not vector...
+
+download a font package from font-squirrel (cachable)
+
+find a "slugify" function, and use it to generate IDS based on name (lowercase, and special_chars_cleanup)
+
+
+
+
 */
 
-
+/*
 
 function foo() {
 	document.getElementById('clock').textContent = new Date();
 	setTimeout(foo, 100);
 }
+*/
 
 function removeDuplicateElement(arrayName)
   {
@@ -60,8 +70,6 @@ function updateTime(){
 
 $(document).ready(function() {
 	
-
-
 	
 	//sammy put route for the submit...
 	
@@ -106,18 +114,17 @@ updateTime();
 		this.use('Title');
 		this.use(Sammy.JSON);
 
-		// HOMEPAGE
+		// LOAD ROUTE (homepage)
 		this.get('/', function (context) {
 			
 			//rebuild clocks from cookie...
 			
-			
-			CoolClock.findAndCreateClocks();
+			CoolClock.findAndCreateClocks(); //create canvas for analog clocks.
 			
 		}); //end "get #/"
     
 		
-		
+		/////ADD ROUTE
 		this.post('#/post/q', function(context) {
 			sammy.trigger('show-page', {page: 'links'});
 			// alert(sammy.cities);
@@ -131,12 +138,12 @@ updateTime();
 				cityname = val['ci'];
 				country = val['co'];
 				
-				
-				if(str == cityname){ //todo, lowercase the comparaison, replace the dashes...
+				//alert("str = "+ str);
+				if(str.toLowerCase() == cityname.toLowerCase()){ //todo, lowercase the comparaison, replace the dashes...
 					//perfect match!
 					//alert("perfect!" + val);
 					newCity = val;
-				}else if(0){ //we find if it may be a possible match
+				}else if(0){ //we find if it may be a possible match: clean comas...
 					if(str){	//indexof, without coma...
 						possibleCities.push(val); //!!TOOD correct it
 					}
@@ -178,7 +185,10 @@ updateTime();
 								var offset = $(this).find('.offset').text();
 								cityTime.setTime(gmt.getTime() - ( offset * 60000) );
 								$(this).find('.hours').text(cityTime.getHours());
-								$(this).find('.minutes').text(cityTime.getMinutes());
+								var strMinutes = cityTime.getMinutes();
+
+								if(strMinutes < 10){ strMinutes = '0'+strMinutes;	} //prepend a zero if 1 digit
+								$(this).find('.minutes').text(strMinutes);
 								$(this).find('.mili').text(cityTime.getTime());
 								//todo: update Analog.
 							});
@@ -218,6 +228,13 @@ updateTime();
 			return false; //event.preventDefault(); 
 		});
 		
+		/////DELETE ROUTE
+		this.del('#/del/clock', function (context) {
+			var toDelete = this.params['clock_name'];
+			//remove clock, according to hidden field value!
+			alert(toDelete);
+			
+		}); //end "del #/del/clock"
 		
 		
 	});//eo sammy routes

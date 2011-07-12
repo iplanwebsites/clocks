@@ -4,8 +4,12 @@
 <html>
  <head>
   <title>Clock</title>
+	<!-- 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> -->
+
+	<script src="js/jquery-1.6.1.min.js"></script>
+  <script src="js/jquery-ui-1.8.14.custom.min.js"></script>
 
 	<script src="js/sammy/sammy.js"></script>
 	<script src="js/sammy/plugins/sammy.template.js"></script>
@@ -22,18 +26,28 @@
   <script src="clock.js"></script>
   
 
-	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-	<link rel="stylesheet" href="clock.css">
+	<link rel="stylesheet" href="css/reset.css">
+	<link href="css/ui-lightness/jquery-ui-1.8.14.custom.css" rel="stylesheet" type="text/css"/>
+	
+	<link rel="stylesheet" href="css/styles_clock.css">
+
 
 
 
  </head>
- <body onload="foo()">
+ <body>
+	<!-- 
   <p>The time is: <output id="clock"></output></p>
+-->
+
+<h1>Cities</h1>
+
 
 <div id="clocks">
-	clocks
-	</div>
+	<!-- .clocks are loaded here... -->
+	
+</div>
+<div class="clear"></div>
 
 <div id="new_clock">
 <form action="#/post/q"  method="POST" id="search_form">
@@ -42,10 +56,7 @@
 </form>
 </div>
 
-<form action="#/del/clock"  method="DEL">
-	<input name="clock_name" type="hidden" value="Montreal, QC"/>
-	<input type="submit" value="delete!">
-</form>
+
 
 
 
