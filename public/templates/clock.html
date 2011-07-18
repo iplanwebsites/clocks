@@ -2,7 +2,7 @@
   <div class="delete_bt">
 	<form action="#/del/clock"  method="DELETE">
 		<input name="clock_name" type="hidden" value="<%= city.ci %>"/>
-		<input type="submit" class="submit" value="X">
+		<input type="submit" class="submit" value="×">
 	</form>
 	</div>
 	
@@ -11,7 +11,7 @@
 	<h3><%= city.tz.name %></h3>
 	
 	<div class="analog">
-		<canvas clock="analog_canvas" class="CoolClock:chunkySwiss:100:seconds:<%= (city.tz.off / 60) * -1  %>"></canvas>
+		<canvas clock="analog_canvas" class="CoolClock:felix:100:noSeconds:<%= (city.tz.off / 60) * -1  %>"></canvas>
 	</div>
 	
         <div class="offset"><%= city.tz.off %></div>

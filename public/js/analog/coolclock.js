@@ -22,7 +22,7 @@ CoolClock.config = {
 	defaultSkin: "chunkySwiss",
 	// Should be in skin probably...
 	// (TODO: allow skinning of digital display)
-	showSecs: true,
+	showSecs: false,
 	showAmPm: true,
 
 	skins:	{

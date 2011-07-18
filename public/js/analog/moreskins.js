@@ -1,5 +1,16 @@
 CoolClock.config.skins = {
-
+	
+	
+	felix: {
+		outerBorder:      { lineWidth: 1, radius: 97, color: "#aaa", fillColor: "#fbfbfb",alpha: 1 },
+		smallIndicator:   { lineWidth: 3, startAt: 89, endAt: 93, color: "#e7e7e7", alpha: 1 },
+		largeIndicator:   { lineWidth: 6, startAt: 80, endAt: 93, color: "#e1e1e1", alpha: 1 },
+		hourHand:         { lineWidth: 9, startAt: -15, endAt: 60, color: "#222", alpha: 1 },
+		minuteHand:       { lineWidth: 4, startAt: -15, endAt: 85, color: "#666", alpha: 1 },
+		secondHand:       { lineWidth: 1, startAt: -20, endAt: 85, color: "red", alpha: 1 },
+		secondDecoration: { lineWidth: 2, startAt: 70, radius: 8, fillColor: "red", color: "red", alpha: 1 }
+	},
+	
 	swissRail: {
 		outerBorder:      { lineWidth: 2, radius: 95, color: "black", alpha: 1 },
 		smallIndicator:   { lineWidth: 2, startAt: 88, endAt: 92, color: "black", alpha: 1 },
@@ -10,6 +21,8 @@ CoolClock.config.skins = {
 		secondDecoration: { lineWidth: 1, startAt: 70, radius: 4, fillColor: "red", color: "red", alpha: 1 }
 	},
 
+
+	
 	chunkySwiss: {
 		outerBorder:      { lineWidth: 4, radius: 97, color: "black", alpha: 1 },
 		smallIndicator:   { lineWidth: 4, startAt: 89, endAt: 93, color: "black", alpha: 1 },

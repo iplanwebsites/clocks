@@ -2,8 +2,11 @@ output { font: 2em sans-serif; }
 
 
 
-h1{ font-size:100px; font-weight:100; letter-spacing:30px; text-transform:uppercase; color:#fff; }
-body, html{  background:#cca;}
+header h1{ font-size:100px; font-weight:100; letter-spacing:15px; 
+	text-transform:uppercase; color:#edf6f9; margin-left:25px;
+	margin-top:10px;
+	 }
+body, html{  background:#daecf2;}
 
 
 #toggle_format{ float:right;}
@@ -26,7 +29,7 @@ body, html{  background:#cca;}
 	padding:10px;
 	padding-top:0px;
 	float:left;
-	margin-right:10px;
+	margin-right:30px;
 	
 	 }
 .clock h2{
@@ -35,6 +38,8 @@ body, html{  background:#cca;}
 	font-weight:100; font-style:normal;
 	margin-left:-10px;
 	/* TOOD: NOWRAP, overflow:hidden */
+	height:50px;
+	overflow:hidden;
 	}
 	
 .clock h3{
@@ -47,8 +52,14 @@ body, html{  background:#cca;}
 .city-time{ font-size:70px; padding-left:20px; cursor:normal;}
 .city-time .hours{ color:#777; }
 .city-time .minutes{ color:#ccc; }
-.city-time .sep{ color:#777; }
-.city-time .sep.blink{ color:#aaa; }
+.city-time .sep{ 
+	-webkit-transition: all 0.2s ease-in-out;
+-moz-transition: all 0.2s ease-in-out;
+-o-transition: all 0.2s ease-in-out;
+-ms-transition: all 0.2s ease-in-out;
+transition: all 0.2s ease-in-out;
+color:#eee; }
+.city-time .sep.active{ color:#aaa; }
 .city-time .am, .city-time .am {color:#ccc; font-size:12px;}
 
 .city-time .ampm{ float:right; font-size:10px; margin-top:20px;}
@@ -57,21 +68,73 @@ body, html{  background:#cca;}
 .clock .mili, .clock .offset, .clock .gmt-time{ display:none;}
 
 
-.clock .analog canvas{ opacity: 0.5; }
+.clock .analog canvas{ opacity: 0.7; }
+.clock:hover .analog canvas{ opacity: 1; }
 
-.clock .delete_bt{ background:#f00;  float:right; text-align:right; }
-.clock .delete_bt .submit{ opacity:0.5; background: #0f0 url('img/TODOO'); }
-.clock .delete_bt:hover{ opacity:1; }
+.clock .city-time, .clock h3{ opacity: 0.7;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+ }
+.clock h3{ opacity: 0.3;}
+.clock:hover .city-time, .clock:hover h3{ opacity: 1;}
+.clock {  box-shadow: 0px 0px 0px #fff;	-webkit-transition: all 0.2s ease-in-out;
+-moz-transition: all 0.2s ease-in-out;
+-o-transition: all 0.2s ease-in-out;
+-ms-transition: all 0.2s ease-in-out;
+transition: all 0.2s ease-in-out; }
+.clock:hover { background:#fff;  box-shadow: 2px 2px 5px #82b6c7; }
+
+
+.clock .delete_bt{  float:right; text-align:right; display:none; margin-top:5px; }
+.clock:hover .delete_bt{ display:block;}
+.clock .delete_bt .submit{ 
+	opacity:0.5; color:#fff; background:#999; 
+	border:0px #fff;
+	border-radius:20px; width:23px; height:23px; text-align:center;
+	font-size:20px; 
+	line-height:1em;
+}
+.clock .delete_bt .submit:hover{ opacity:1; }
 
 /* ============-  NEW clock box  -============= */
 #new_clock{ height:300px;}
-#new_clock h1{ font-size:200px; color:#999; line-height:0.5em; padding:30px 0px;  }
+#new_clock h1{ font-size:150px; line-height:0.5em; padding:30px 0px; font-weight:normal; color:#cccccc;  }
 #new_clock p{ color:#999; }
-#new_clock input{ font-size:30px; padding:5px; margin-bottom:10px; width:180px;  }
+#new_clock input{ font-size:20px; padding:5px; margin-bottom:10px;  text-transform:uppercase;  }
+#new_clock .field{ 
+	color:#ccc; outline: none;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	box-shadow: 1px 1px 5px #ccc;
+	border:#999 solid 2px;
+	padding:16px 20px;
+	width:160px;
+}
+#new_clock .field:focus{ 
+	color:#1c9fcb; box-shadow: 3px 3px 18px #daecf2;
+	
+	
+}
+#new_clock .bt{ 
+	color:#fff; background:#d9d9d9; width:200px;		
+	box-shadow: 1px 1px 5px #ccc;
+		border:#999 solid 2px;
+		padding:12px 20px;
+		-webkit-transition: all 0.2s ease-in-out;
+		-moz-transition: all 0.2s ease-in-out;
+		-o-transition: all 0.2s ease-in-out;
+		-ms-transition: all 0.2s ease-in-out;
+		transition: all 0.2s ease-in-out;
+}
+#new_clock .bt:hover{ background:#888; }
 
-
-
-
+.ui-menu .ui-menu-item a { text-transform: uppercase; }
 
 
 

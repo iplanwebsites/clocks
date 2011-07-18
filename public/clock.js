@@ -73,6 +73,10 @@ function updateTime(){
 	gmt.setTime(here.getTime() + (offset*60000) );
 	
 	$('.clock').trigger('minuteChange'); //TODO: only call when minute change!
+	
+	//TODO!! - debug this code...
+	$('.city-time .format.active').removeClass('active');
+	$('.city-time .format .'ampm).addClass('active');
 }
 
 
