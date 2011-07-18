@@ -72,11 +72,18 @@ function updateTime(){
 	gmt = new Date();
 	gmt.setTime(here.getTime() + (offset*60000) );
 	
-	$('.clock').trigger('minuteChange'); //TODO: only call when minute change!
+	if( gmt.getSeconds() == 0){
+		$('.clock').trigger('minuteChange'); //TODO: only call when minute change!
+	}
 	
+	if( gmt.getSeconds() % 2 == 0){
+		$('.clock .sep').addClass('active');
+	}else{
+		$('.clock .sep').removeClass('active');
+	}
 	//TODO!! - debug this code...
 	$('.city-time .format.active').removeClass('active');
-	$('.city-time .format .'ampm).addClass('active');
+	$('.city-time .format .ampm').addClass('active');
 }
 
 
@@ -140,7 +147,7 @@ updateTime();
 		this.put('#/put/format', function (context) {
 				var time_format = this.param['format']; //either metric, or ampm
 			$('.city-time .format.active').removeClass('active');
-			$('.city-time .format .'ampm).addClass('active');
+			$('.city-time .format .ampm').addClass('active');
 			alert('setting 12/24 to');
 			// !! TODO!
 			// There are 2 things! the format, and the am and pm toggling, handle am-pm in time management
@@ -191,12 +198,20 @@ updateTime();
 							}
 					});//eo each tz
 					
+					//setting the display name (top of the box)
+					if(! newCity['accronym']){
+						newCity['accronym'] = newCity['ci'].strReplace('TODO REGEX: everything after the coma', '');
+						newCity['accronym'] = newCity['accronym'].slice(0,8); //TODO: 8 chars maximum...
+					}
+					
+					
 					cityTime = new Date();
 					//TODO! We should take into account the daylight saving times!!
 					cityTime.setTime(gmt.getTime() - ( newCity['tz']['off'] * 60000) );
 					
 					
-					//Append the click DIV
+					
+					//Append to the clock DIV
 					context.clocksDiv = context.$element('#clocks');
 					//$(context.linkContainer).html('');
           context.render('templates/clock.html', {city: newCity, cityTime: cityTime})
