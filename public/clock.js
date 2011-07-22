@@ -175,6 +175,7 @@ updateTime();
 				if(str.toLowerCase() == cityname.toLowerCase()){ //todo, lowercase the comparaison, replace the dashes...
 					//perfect match!
 					//alert("perfect!" + val);
+					
 					newCity = val;
 				}else if(0){ //we find if it may be a possible match: clean comas...
 					if(str){	//indexof, without coma...
@@ -185,23 +186,25 @@ updateTime();
 					//let the user pick...?
 				}
 			});//eo cities for each
-			
+		//	alert('newCity = ' + newCity);
 				if(newCity){ //flag: if we found a good match, good enought to add it without further disambiguation...
 					//We find which TZ this city relates to, and add it to the object.
-					
+				//	alert('newCity = ' + newCity);
 					 $.each(sammy.tz, function(index_tz, data_tz) {
 							if(data_tz['name'] == newCity['z']){ 
 								//alert('name matches!' + newCity);
 								newCity['tz'] = data_tz; //we embed the timezone object within the city one
 							}else{
+								// newCity['tz'] = 0;
 								//No timezone found for this city...
 							}
 					});//eo each tz
 					
 					//setting the display name (top of the box)
-					if(! newCity['accronym']){
-						newCity['accronym'] = newCity['ci'].strReplace('TODO REGEX: everything after the coma', '');
-						newCity['accronym'] = newCity['accronym'].slice(0,8); //TODO: 8 chars maximum...
+			
+					if(! newCity['acronym']){
+						newCity['acronym'] = newCity['ci'].split(',',1); //returns what's before coma only
+						//newCity['accronym'] = newCity['accronym'].slice(0,8); //TODO: 8 chars maximum...
 					}
 					
 					
@@ -212,15 +215,15 @@ updateTime();
 					
 					
 					//Append to the clock DIV
+			//		alert('appending...');
 					context.clocksDiv = context.$element('#clocks');
 					//$(context.linkContainer).html('');
           context.render('templates/clock.html', {city: newCity, cityTime: cityTime})
             .prependTo(context.clocksDiv).then(function(content) {
 							//TODO: init the analog clock here once the markup is there...
 				
-							
+					//	alert('THEN...');
 							$('.clock').bind('minuteChange', function() {
-							  //alert('User clicked on "foo."');
 								cityTime = new Date();
 								//TODO! We should take into account the daylight saving times!!
 								var offset = $(this).find('.offset').text();

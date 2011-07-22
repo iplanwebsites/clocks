@@ -6,5 +6,6 @@ configure do
 end
 
 get '/' do
-	redirect '/clock.html'
+	# redirect '/clock.html'
+	erb :index
 end
