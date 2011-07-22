@@ -2,9 +2,11 @@ output { font: 2em sans-serif; }
 
 
 
-header h1{ font-size:100px; font-weight:100; letter-spacing:15px; 
-	text-transform:uppercase; color:#edf6f9; margin-left:25px;
+header h1{ font-size:120px; font-weight:100; letter-spacing:5px; 
+	text-transform:uppercase; color:#edf6f9; margin-left:3%;
 	margin-top:10px;
+	font-family:'OstrichSansMedium', arial;
+	line-height:1.1em;
 	 }
 body, html{  background:#daecf2;}
 
@@ -23,9 +25,11 @@ body, html{  background:#daecf2;}
 
 
 /* ============-  clocks  -============= */
-#clocks{ width:100%; padding: 10px 30px;}
+#clocks{ width:94%; padding: 10px 0px; margin:auto;}
 .clock{ 
-	width:220px; height:350px; background:#fff; margin-top:30px; 
+	width:220px; height:350px; background:#fff; 
+	margin-bottom:40px; 
+	margin-top:15px;
 	padding:10px;
 	padding-top:0px;
 	float:left;
@@ -34,12 +38,14 @@ body, html{  background:#daecf2;}
 	 }
 .clock h2{
 	cursor:normal;
-	color:#fff; margin-top:-38px; font-size:40px; text-transform:uppercase; 
+	color:#fff; margin-top:-29px; font-size:40px; text-transform:uppercase; 
 	font-weight:100; font-style:normal;
 	margin-left:-10px;
 	/* TOOD: NOWRAP, overflow:hidden */
 	height:50px;
 	overflow:hidden;
+	font-family:'OstrichSansBlack', arial;
+	line-height:1em;
 	}
 	
 .clock h3{
@@ -49,10 +55,14 @@ body, html{  background:#daecf2;}
 		padding-bottom:20px;
 	}
 
-.city-time{ font-size:70px; padding-left:20px; cursor:normal;}
-.city-time .hours{ color:#777; }
+.city-time{ 
+	font-size:100px; padding-left:45px; cursor:normal; 	font-family:'OstrichSansMedium', arial;
+	line-height:1em;
+}
+.city-time .hours{ color:#444; }
 .city-time .minutes{ color:#ccc; }
 .city-time .sep{ 
+	padding:0px 5px;
 	-webkit-transition: all 0.2s ease-in-out;
 -moz-transition: all 0.2s ease-in-out;
 -o-transition: all 0.2s ease-in-out;
@@ -81,10 +91,12 @@ color:#eee; }
 .clock h3{ opacity: 0.3;}
 .clock:hover .city-time, .clock:hover h3{ opacity: 1;}
 .clock {  box-shadow: 0px 0px 0px #fff;	-webkit-transition: all 0.2s ease-in-out;
--moz-transition: all 0.2s ease-in-out;
--o-transition: all 0.2s ease-in-out;
--ms-transition: all 0.2s ease-in-out;
-transition: all 0.2s ease-in-out; }
+-moz-transition: all 0.6s ease-in-out;
+-o-transition: all 0.6s ease-in-out;
+-ms-transition: all 0.6s ease-in-out;
+transition: all 0.6s ease-in-out; 
+}
+.clock.fadein{  opacity:0.1; overflow:hidden; }
 .clock:hover { background:#fff;  box-shadow: 2px 2px 5px #82b6c7; }
 
 
