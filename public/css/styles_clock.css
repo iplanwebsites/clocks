@@ -49,9 +49,11 @@ body.ampm #toggle_format .format.ampm{}
 	padding:0 2px ;
 	/* TOOD: NOWRAP, overflow:hidden */
 	height:50px;
+	 white-space:nowrap;
 	overflow:hidden;
 	font-family:'OstrichSansBlack', arial;
 	line-height:1em;
+	
 	}
 	
 .clock h3{
