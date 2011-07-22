@@ -2,7 +2,11 @@
 
 TODO
 
-download a font package from font-squirrel (cachable)
+cache the fonts!
+
+daylight saving times!!
+
+delete function!
 
 Update time in clocks (setInterval, on seconds, we update GMT, and then refresh the clocks...)
 
