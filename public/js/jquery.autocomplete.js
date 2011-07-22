@@ -1,3 +1,5 @@
+// SRC: http://www.pengoworks.com/workshop/jquery/autocomplete.htm
+
 jQuery.autocomplete = function(input, options) {
 	// Create a link to self
 	var me = this;
