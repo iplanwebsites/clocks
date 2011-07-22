@@ -46,6 +46,11 @@ todo: add alternate spelling for major cities... (localized + accronyms)
 
 
 todo: position in css all time digit statically (with left and right alignement...)
+
+todo: rollover bug with fadein colcks (just added ones...)
+
+todo: data: add a top hit value, so we suggest more important cities first.
+
 */
 
 /*
@@ -59,15 +64,18 @@ function foo() {
 function setTimeFormat(newFormat){
 	// alert('set to ' + newFormat);
 	if(newFormat == '24'){
+		format = 'metric';
 		//$('.city-time .format.metric').addClass('active');
 		$('body').addClass('metric');
 		$('body').removeClass('ampm');
 	}else{
+		format = 'ampm';
 		//$('.city-time .format.ampm').addClass('active');
 		$('body').removeClass('metric');
 		$('body').addClass('ampm');
 	}
-	//save to a cookie...
+	updateTime(1);
+	//todo: save pref to a cookie...
 }
 
 
@@ -89,17 +97,17 @@ function removeDuplicateElement(arrayName)
 
 
 
-function updateTime(){
+function updateTime(forceTimeRefresh){
 	var here = new Date();
 	var offset = here.getTimezoneOffset(); //returns 120 for 2 hours.
 	gmt = new Date();
 	gmt.setTime(here.getTime() + (offset*60000) );
 	
-	if( gmt.getSeconds() == 0){
-		$('.clock').trigger('minuteChange'); //TODO: only call when minute change!
-	}
+	//if( gmt.getSeconds() == 0){
+		$('.clock').trigger('minuteChange'); //TODO: only call when minute change! OR when called from
+//	}
 	
-	if( gmt.getSeconds() % 2 == 0){
+	if( (gmt.getSeconds() % 2 == 0) || forceTimeRefresh ){
 		$('.clock .sep').addClass('active');
 	}else{
 		$('.clock .sep').removeClass('active');
@@ -209,12 +217,12 @@ $(document).ready(function() {
 	
 	
 	setInterval(function() {
-		updateTime();
+		updateTime(0);
 	  // Do something every 1 seconds
 	}, 1000);
 	
 
-updateTime();
+updateTime(1);
 	
 	//set action on buttons...
 	
@@ -324,7 +332,21 @@ updateTime();
 								//TODO! We should take into account the daylight saving times!!
 								var offset = $(this).find('.offset').text();
 								cityTime.setTime(gmt.getTime() - ( offset * 60000) );
-								$(this).find('.hours').text(cityTime.getHours());
+								
+								var h = cityTime.getHours();
+								if(format == 'ampm'){
+									if(h > 12){
+										var ampm = 'pm';
+										$(this).addClass('pm');
+										$(this).removeClass('am');
+									}else{
+										var ampm = 'am';
+										$(this).addClass('am');
+										$(this).removeClass('pm');
+									}
+									h = h % 12;
+								}
+								$(this).find('.hours').text(h);
 								var strMinutes = cityTime.getMinutes();
 
 								if(strMinutes < 10){ strMinutes = '0'+strMinutes;	} //prepend a zero if 1 digit

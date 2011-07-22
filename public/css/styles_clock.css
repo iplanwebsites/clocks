@@ -58,7 +58,8 @@ body.ampm #toggle_format .format.ampm{}
 	cursor:normal;
 		color:#aaa; font-size:12px; text-transform:uppercase; 
 		font-weight:100; font-style:normal;
-		padding-bottom:20px;
+		padding-bottom:12px;
+		line-height:1em;
 	}
 
 .city-time{ 
@@ -76,11 +77,42 @@ body.ampm #toggle_format .format.ampm{}
 transition: all 0.2s ease-in-out;
 color:#eee; }
 .city-time .sep.active{ color:#aaa; }
-.city-time .am, .city-time .am {color:#ccc; font-size:12px;}
 
-.city-time .ampm{ float:right; font-size:10px; margin-top:20px;}
+
+
 .city-time .format.active{ color:#000;} /* TODO: active state */
 	
+	
+	
+	
+body.metric .clock .ampm{ display:none;  } /* hide AM/PM toggle on 24 mode*/
+
+.clock .ampm{ margin-top:16px; margin-right:5px; float:right; }
+.clock .ampm .am, .clock .ampm .pm{
+	width:40px; height:15px;
+	font-size:16px;
+	margin:0px;
+	padding:0;
+	line-height:1em;
+	border-radius: 15px;
+	text-align:center;
+	padding-top:3px;
+	margin-top:4px;
+	font-weight:bold;
+	letter-spacing:1px;
+	padding-left:1px;
+}
+
+.clock.am .ampm .am, .clock.pm .ampm .pm {  /* active am pm */
+	background:#aaa;
+	color:#fff;
+}
+
+.clock.am .ampm .pm, .clock.pm .ampm .am {  /*not active ap mp */
+	background:#fff;
+	color:#ddd;
+}
+
 .clock .mili, .clock .offset, .clock .gmt-time{ display:none;}
 
 
@@ -103,7 +135,7 @@ color:#eee; }
 transition: all 0.6s ease-in-out; 
 }
 .clock.fadein{  opacity:0.1; overflow:hidden; }
-.clock:hover { background:#fff;  box-shadow: 2px 2px 5px #82b6c7; }
+.clock:hover { background:#fff;  /*box-shadow: 2px 2px 5px #82b6c7; */}
 
 
 .clock .delete_bt{  float:right; text-align:right; display:none; margin-top:5px; }
