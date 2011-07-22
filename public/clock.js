@@ -44,6 +44,8 @@ todo: add timezones in the autocomplete and support for them...
 
 todo: add alternate spelling for major cities... (localized + accronyms)
 
+
+todo: position in css all time digit statically (with left and right alignement...)
 */
 
 /*
@@ -53,6 +55,22 @@ function foo() {
 	setTimeout(foo, 100);
 }
 */
+
+function setTimeFormat(newFormat){
+	// alert('set to ' + newFormat);
+	if(newFormat == '24'){
+		//$('.city-time .format.metric').addClass('active');
+		$('body').addClass('metric');
+		$('body').removeClass('ampm');
+	}else{
+		//$('.city-time .format.ampm').addClass('active');
+		$('body').removeClass('metric');
+		$('body').addClass('ampm');
+	}
+	//save to a cookie...
+}
+
+
 
 function removeDuplicateElement(arrayName)
   {
@@ -198,6 +216,19 @@ $(document).ready(function() {
 
 updateTime();
 	
+	//set action on buttons...
+	
+	$('#format_form .format').bind('touch click', function(){
+		//we set the hidden field with the inner html (either 12 or 24)
+		var format = $(this).html();
+		setTimeFormat(format);
+	});
+	
+	
+	
+	
+	
+	
 	
 	sammy = Sammy('body', function () {
 		this.use(Sammy.Template, 'html'); //default uses .template file ext for templates
@@ -213,22 +244,13 @@ updateTime();
 			
 			CoolClock.findAndCreateClocks(); //create canvas for analog clocks.
 			
+			
+			//TODO: find from cookie...
+			setTimeFormat('24');
 		}); //end "get #/"
     
 		
-		this.put('#/put/format', function (context) {
-				var time_format = this.param['format']; //either metric, or ampm
-			$('.city-time .format.active').removeClass('active');
-			$('.city-time .format .ampm').addClass('active');
-			alert('setting 12/24 to');
-			// !! TODO!
-			// There are 2 things! the format, and the am and pm toggling, handle am-pm in time management
-			
-			
-		}); //end format route
-		
-		
-		
+
 		
 		/////ADD ROUTE
 		this.post('#/post/q', function(context) {
