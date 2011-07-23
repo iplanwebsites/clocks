@@ -19,6 +19,7 @@ re-order clock so they appear in chronologic order (past -present - future)
 if the clock already exist, dont add it again...
 
 
+todo: on some instance, the time wrap on another line (ex: 10:35)
 
 position and stretch the clocks all dynamically, so they always fill all the screen: 
  - may not be possible to keep everything relative in size
@@ -324,11 +325,22 @@ updateTime(1);
 					
 					//Append to the clock DIV
 			//		alert('appending...');
+			
+			//find if this clock is already there...
+			if( $('.clock h2[alt="'+newCity['ci']+'"]').length > 0){ //if the clock's already there...
+				$('.clock h2[alt="'+newCity['ci']+'"]').parent().addClass('yellowfade').delay(500).queue(function(next){
+				    $(this).removeClass("yellowfade");
+				    next();
+				});
+			}else{ //if it's not present on page, we add it to DOM
+			
 					context.clocksDiv = context.$element('#clocks');
-					//$(context.linkContainer).html('');
+					
+					
+					
           context.render('templates/clock.html', {city: newCity, cityTime: cityTime})
             .prependTo(context.clocksDiv).then(function(content) {
-							//TODO: init the analog clock here once the markup is there...
+							
 				
 					//	alert('THEN...');
 							$('.clock').bind('minuteChange', function() {
@@ -366,8 +378,9 @@ updateTime(1);
 							
 							//init this clock's buttons
 							//context.trigger('filter-item'); //if field is already populated (page refresh)
-        	});
-					
+        	}); // eo appending
+				
+				} // eo if clock already there
 					
 				//init the new clock...
 				
@@ -402,7 +415,12 @@ updateTime(1);
 		this.del('#/del/clock', function (context) {
 			var toDelete = this.params['clock_name'];
 			//remove clock, according to hidden field value!
-			alert(toDelete);
+			$('.clock h2[alt="'+toDelete+'"]').parent().addClass('fadein').delay(200).queue(function(next){
+			    $(this).hide(0); //just because it runs faster than the entire remove function
+					$(this).remove();
+			    next();
+			});
+			//alert(toDelete);
 			
 		}); //end "del #/del/clock"
 		
