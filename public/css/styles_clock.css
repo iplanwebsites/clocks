@@ -176,7 +176,7 @@ margin-right:25px; /* instead of 30 normally...*/
 	transition: all 0.2s ease-in-out;
 	box-shadow: 1px 1px 5px #ccc;
 	border:#999 solid 2px;
-	padding:16px 20px;
+	padding:16px 1px 16px 16px; /* trbl*/
 	width:160px;
 }
 #new_clock .field:focus{ 

@@ -285,16 +285,19 @@ updateTime(1);
 								
 								var h = cityTime.getHours();
 								if(format == 'ampm'){
-									if(h > 12){
-										var ampm = 'pm';
-										$(this).addClass('pm');
-										$(this).removeClass('am');
-									}else{
+									// http://en.wikipedia.org/wiki/24-hour_clock
+									if( (h <= 11) && (h >= 0)){
 										var ampm = 'am';
 										$(this).addClass('am');
 										$(this).removeClass('pm');
+									}else{
+										var ampm = 'pm';
+										$(this).addClass('pm');
+										$(this).removeClass('am');
+										
 									}
 									h = h % 12;
+									if (h == 0){ h = 12; } //we dont's show 0:12 in am-pm format...
 								}
 								$(this).find('.hours').text(h);
 								var strMinutes = cityTime.getMinutes();
