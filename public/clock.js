@@ -107,6 +107,30 @@ function lookupLocal(){
 $(document).ready(function() {
 	
 	
+	
+	
+	
+	
+	// MODEL CODE...
+	
+	var Project = Model("project");
+
+
+// Start loop here
+	var project = new Project({ title: "stu22ff" });
+	project.attr("title", "nonsense");
+	project.save();
+	
+// end JSOn loop here...
+	
+	alert(Project.count());
+	
+	
+	
+	
+	
+	
+	
 	//sammy put route for the submit...
 	
 	
