@@ -16,7 +16,6 @@ re-order clock so they appear in chronologic order (past -present - future)
 
 if the clock already exist, dont add it again...
 
-
 todo: on some instance, the time wrap on another line (ex: 10:35)
 
 position and stretch the clocks all dynamically, so they always fill all the screen: 
@@ -24,6 +23,9 @@ position and stretch the clocks all dynamically, so they always fill all the scr
  - can the canvas be stretched: yes, but there aliasing, it's not vector...
 
 find a "slugify" function, and use it to generate IDS based on name (lowercase, and special_chars_cleanup)
+
+slugify the pattern
+	
 
 
 Autocomplete: 
@@ -42,7 +44,6 @@ On a mouse device only, we only show the delete option when the clock is overed 
  - radio that autosubmit the form when changed...
 
 
-
 todo: add timezones in the autocomplete and support for them...
 
 todo: add alternate spelling for major cities... (localized + accronyms)
@@ -55,3 +56,9 @@ todo: rollover bug with fadein colcks (just added ones...)
 todo: data: add a top hit value, so we suggest more important cities first.
 
 */
+
+
+
+
+
+
