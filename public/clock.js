@@ -113,72 +113,92 @@ $(document).ready(function() {
 	
 	// MODEL CODE...
 	
-	var Project = Model("project");
+	var TZ = Model("tz", function() {
+	  this.persistence(Model.localStorage);
+	});
+	
+	var City = Model("city", function() {
+	  this.persistence(Model.localStorage);
+	});
+	
+	
+	var Clock = Model("clock", function() {
+	  this.persistence(Model.localStorage);
+	});
 
+
+
+	
+	  Clock.load(function() {
+			//alert('loaded projetcs!');
+	    // do something with the UI
+	  })
+
+
+
+
+
+
+$.getJSON('data/timezones.json', function(data) { //cached...
+		sammy.tz = data;  
+});
+
+
+City.load(function() {
+	//alert('loaded projetcs!');
+  // do something with the UI
+});
+
+
+
+alert( City.count() );
+
+if (City.count() == 0){ //if it'S not in cache...
+
+$.getJSON('data/cities.json', function(data) { //cached...
+	// sammy.cities = data;  
+	//	var autocompleteItem = [];
+  $.each(data, function(key, val) {
+   // autocompleteItem.push(val['ci']); //city name
+ 
+		var city = new City(val);
+		city.attr("test", 1);
+		city.save();
+  }) //end of each...
+});//eo json init
+}//end if!
+
+	alert( City.count() );
+	
+	autocompleteItem = ['paris', 'montreal']; //removeDuplicateElement(autocompleteItem);
+	
 
 // Start loop here
-	var project = new Project({ title: "stu22ff" });
-	project.attr("title", "nonsense");
-	project.save();
+/*
+	var clock = new Clock({ title: "stu22ff" });
+	clokc.attr("title", "nonsense");
+	clock.save();*/
 	
 // end JSOn loop here...
 	
-	alert(Project.count());
-	
-	
-	
-	
-	
-	
-	
-	//sammy put route for the submit...
-	
-	
-	
-	//Load Json - init...
-	$.getJSON('data/timezones.json', function(data) { //cached...
-			sammy.tz = data;  
-	});
-	
-	$.getJSON('data/cities.json', function(data) { //cached...
-		sammy.cities = data;  
-		var autocompleteItem = [];
-	  $.each(data, function(key, val) {
-	    autocompleteItem.push(val['ci']); //city name
-			// autocompleteItem.push(val['z']); //zone name !! TODO!!
-	  });
-		autocompleteItem = removeDuplicateElement(autocompleteItem);
 		
-		// We init the auto-complete once we gathered all city + zones names.
-		
-		/* OLD VERSION JQ-UI
-		$("input#q").autocomplete({
-			source: autocompleteItem,
-			minLength: 1,
-			delay: 0
-		});
-		*/
-		
-		
-		$("input#q").autocompleteArray(
-				autocompleteItem,
-				{
-					delay:10,
-					minChars:1,
-					matchSubset:1,
-					onItemSelect:selectItem,
-					onFindValue:findValue,
-					autoFill:true,
-					maxItemsToShow:10
-				}
-			);
-		//});
-		
-		
-		
-	});// eo get Json (init)
+	//)};// eo get Json (init)
 	
 	
+	
+	$("input#q").autocompleteArray(
+			autocompleteItem,
+			{
+				delay:10,
+				minChars:1,
+				matchSubset:1,
+				onItemSelect:selectItem,
+				onFindValue:findValue,
+				autoFill:true,
+				maxItemsToShow:10
+			}
+		);
+		
 	setInterval(function() {
 		updateTime(0);
 	  // Do something every 1 seconds
@@ -390,4 +410,6 @@ updateTime(1);
 		
 		sammy.run('/');
 		
-}); //eo doc ready
+ }); //eo doc ready
+
+
