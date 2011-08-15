@@ -150,7 +150,7 @@ City.load(function() {
 });
 
 
-
+// City.destroy();
 alert( City.count() );
 
 if (City.count() == 0){ //if it'S not in cache...
@@ -162,7 +162,7 @@ $.getJSON('data/cities.json', function(data) { //cached...
    // autocompleteItem.push(val['ci']); //city name
  
 		var city = new City(val);
-		city.attr("test", 1);
+		//city.attr("test", 1);
 		city.save();
   }) //end of each...
 });//eo json init
