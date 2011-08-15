@@ -107,32 +107,74 @@ function lookupLocal(){
 $(document).ready(function() {
 	
 	
-	
-	
-	
-	
 	// MODEL CODE...
-	
-	var TZ = Model("tz", function() {
+	 Setting = Model("setting", function() {
 	  this.persistence(Model.localStorage);
 	});
-	
-	var City = Model("city", function() {
+		
+	 TZ = Model("tz", function() {
 	  this.persistence(Model.localStorage);
+		this.extend({
+	    find_by_na: function(name) {
+	      return this.detect(function() {
+	        return  this.attr("na").toLowerCase() == name.toLowerCase()
+	      })
+	    }
+	  }) // eo extend
+	});
+	
+	//if(data_tz['name'] == newCity['z']){ 
+	
+	
+	 City = Model("city", function() {
+	  this.persistence(Model.localStorage);
+		this.extend({ //methods on the collection
+	    find_by_name: function(name) {
+	      return this.detect(function() {
+					//alert(this.attr("ci") +" == "+ name);
+	        return  this.attr("ci").toLowerCase() == name.toLowerCase()
+	      })
+	    }
+	  }) // eo extend
+		this.include({ //methods on instances
+		    markAsDone: function() {
+		      this.attr("done", true)
+		    },
+				add_object_to_ui: function() {
+		      this.attr("done", true)
+		    }
+		})// eo include
+
+
 	});
 	
 	
-	var Clock = Model("clock", function() {
+	 Clock = Model("clock", function() {
 	  this.persistence(Model.localStorage);
+		
 	});
 
 
 
-	
-	  Clock.load(function() {
-			//alert('loaded projetcs!');
-	    // do something with the UI
-	  })
+
+	Clock.bind("add", function(new_object) {
+		// alert('Add clock: '+ new_object);
+	alert(new_object + new_object.attr('name')); // new_object.add_object_to_ui()  
+	//add_object_to_ui(new_object)
+	})
+
+	Clock.bind("remove", function(removed_object) {
+		alert('remove clock: '+removed_object);
+	  //!!! remove_object_from_ui(removed_object)
+	})
+
+	City.load(function() {});
+	Setting.load(function() {});	
+	 Clock.load(function() {
+		alert('loaded '+Clock.count() +' clocks!');
+	  // 
+		// If there are clocks in there, bind the UI template to them!
+	 })
 
 
 
@@ -144,34 +186,34 @@ $.getJSON('data/timezones.json', function(data) { //cached...
 });
 
 
-City.load(function() {
-	//alert('loaded projetcs!');
-  // do something with the UI
-});
-
-
-// City.destroy();
-alert( City.count() );
-
+// POPULATING DATA - on first laod and old browsers
 if (City.count() == 0){ //if it'S not in cache...
-
 $.getJSON('data/cities.json', function(data) { //cached...
-	// sammy.cities = data;  
-	//	var autocompleteItem = [];
   $.each(data, function(key, val) {
-   // autocompleteItem.push(val['ci']); //city name
- 
 		var city = new City(val);
-		//city.attr("test", 1);
 		city.save();
   }) //end of each...
 });//eo json init
 }//end if!
 
-	alert( City.count() );
+
+if (TZ.count() == 0){ //if it'S not in cache...
+$.getJSON('data/timezones.json', function(data) { //cached...
+  $.each(data, function(key, val) {
+		var tz = new TZ(val);
+		tz.save();
+  }) //end of each...
+});//eo json init
+}//end if!
+
+
+
+
+	//alert( City.count() );
 	
-	autocompleteItem = ['paris', 'montreal']; //removeDuplicateElement(autocompleteItem);
 	
+	// autocompleteItem = ['paris', 'montreal']; //removeDuplicateElement(autocompleteItem);
+	autocompleteItem = City.pluck("ci"); //returns an array of all city-names
 
 // Start loop here
 /*
@@ -241,13 +283,45 @@ updateTime(1);
 		}); //end "get #/"
     
 		
+		this.get('/reset', function (context) {
+				Clock.each(function() {
+				  this.destroy();
+				})
+		}); //end "get #/"
 
 		
 		/////ADD ROUTE
-		this.post('#/post/q', function(context) {
+		this.post('/clock', function(context) {
+			alert('POSTED!' + City.count());
+			
 			$('#q').trigger('blur'); //fix for autocomplete to dissapear
-			//sammy.trigger('show-page', {page: 'links'});
 			str = this.params['q'];
+			
+			var theCity = City.find_by_name(str);
+		//	var tzNa = ;
+			var theTz = TZ.find_by_na( theCity.attr("na") );
+			
+			// !!! VALIDATE if we find TZ and CITIES FOR SURE (won't happen if user just type text...)
+			
+			//we then add a clock based on this city!
+			var my_clock = new Clock({ 
+				"city": theCity.attr(), 
+				"tz": theTz.attr(), 
+				"name": "test" 
+			});
+			
+			//city.attr("test", 1);
+			my_clock.save(function(success) {
+			      if (success) {
+								alert('yay');
+			        context.redirect("#/projects/" + project.id())
+			      } else {
+								alert('nnnay');
+			        // display errors...
+			      }
+			    });
+			
+			alert('c = '+Clock.count() );
 			
 			$('#q').val('').focus();
 			
@@ -393,7 +467,7 @@ updateTime(1);
 		});
 		
 		/////DELETE ROUTE
-		this.del('#/del/clock', function (context) {
+		this.del('/clock', function (context) {
 			var toDelete = this.params['clock_name'];
 			//remove clock, according to hidden field value!
 			$('.clock h2[alt="'+toDelete+'"]').parent().addClass('fadein').delay(200).queue(function(next){
